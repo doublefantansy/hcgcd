@@ -1,0 +1,75 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    defaultConfig {
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner rootProject.ext.android.testInstrumentationRunner
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                includeCompileClasspath = true
+            }
+        }
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "d4f6bcc08826d4e289b1768b", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
+    }
+    useLibrary 'org.apache.http.legacy'
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ["libs"]
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+dependencies {
+    implementation project(":base")
+
+    if (rootProject.ext.isModule) {
+        implementation project(":media")
+        implementation project(":main")
+        implementation project(":login")
+        implementation project(":count")
+        implementation project(":map")
+        implementation project(":alarm")
+        implementation project(":my")
+    } else {
+    }
+    implementation(name: 'BaseLib-release', ext: 'aar')
+    implementation(name: 'DataAdapterModule-release', ext: 'aar')
+    implementation(name: 'DHCommon2.0-release', ext: 'aar')
+    implementation(name: 'EntityDefine-release', ext: 'aar')
+    implementation(name: 'DHPlayerComponent-release', ext: 'aar')
+    implementation(name: 'DHPlaySDKModule-release', ext: 'aar')
+    implementation(name: 'LogModule-release', ext: 'aar')
+    implementation(name: 'PullToRefresh_library-release', ext: 'aar')
+    implementation(name: 'OrmliteSqlcipherModlule-release', ext: 'aar')
+    implementation(name: 'PermissionChecker-release', ext: 'aar')
+    implementation(name: 'DataAdapteeModule-release', ext: 'aar')
+}
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <hzkj.cc.base.weight.CcTextView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/base_blue"
+            android:textSize="17sp"></hzkj.cc.base.weight.CcTextView>
+
+        <hzkj.cc.base.weight.CcTextView
+            android:id="@+id/choose"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:text="选择"
+            android:textColor="@color/base_blue"
+            android:textSize="17sp"></hzkj.cc.base.weight.CcTextView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <hzkj.cc.base.weight.pickView.PickerView
+            android:id="@+id/pickLayout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:pv_number="5"
+            app:pv_text_color="#666"
+            app:pv_text_size="20sp"></hzkj.cc.base.weight.pickView.PickerView>
+
+    </LinearLayout>
+</LinearLayout>

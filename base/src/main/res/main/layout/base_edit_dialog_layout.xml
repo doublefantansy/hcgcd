@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/style"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="245dp"
+        android:layout_height="wrap_content">
+
+        <hzkj.cc.base.weight.CcTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="15dp"
+            android:textColor="@color/base_black"
+            android:textSize="17sp"></hzkj.cc.base.weight.CcTextView>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:background="@color/base_white"
+            android:lines="1"
+            android:textCursorDrawable="@drawable/cursor"
+            android:hint="1-16字符"
+            android:padding="5dp" />
+
+        <LinearLayout
+            android:id="@+id/option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit"
+            android:background="@drawable/base_dialog_option_style">
+
+            <hzkj.cc.base.weight.CcTextView
+                android:id="@+id/cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/base_dialog_option_left_style"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="取消"
+                android:textSize="16sp"></hzkj.cc.base.weight.CcTextView>
+
+            <hzkj.cc.base.weight.CcTextView
+                android:id="@+id/submit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="确定"
+                android:textColor="#eb8878"
+                android:textSize="16sp"></hzkj.cc.base.weight.CcTextView>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</RelativeLayout>

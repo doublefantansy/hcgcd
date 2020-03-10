@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  package="hzkj.cc.hcgcd">
+
+  <application
+    android:name=".App"
+    android:allowBackup="true"
+    android:icon="@mipmap/icon"
+    android:label="合川交界水域"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme"
+    android:usesCleartextTraffic="true"
+    tools:replace="android:label">
+    <meta-data
+      android:name="design_width_in_dp"
+      android:value="360" />
+    <meta-data
+      android:name="design_height_in_dp"
+      android:value="640" />
+
+    <service
+      android:name="cn.jpush.android.service.PushService"
+      android:enabled="true"
+      android:exported="false">
+      <intent-filter>
+        <action android:name="cn.jpush.android.intent.REGISTER" />
+        <action android:name="cn.jpush.android.intent.REPORT" />
+        <action android:name="cn.jpush.android.intent.PushService" />
+        <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+      </intent-filter>
+    </service>
+  </application>
+
+</manifest>

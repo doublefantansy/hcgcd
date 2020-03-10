@@ -1,0 +1,18 @@
+<manifest package="hzkj.cc.map"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <application>
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="DS56Bsm0G34u2BGZzPhhDGevGZ62KYSC" />
+        <service
+            android:enabled="true"
+            android:name="com.baidu.location.f"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2"></action>
+            </intent-filter>
+        </service>
+    </application>
+</manifest>

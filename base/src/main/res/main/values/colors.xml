@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="base_blue">#1DA7ED</color>
+    <color name="base_gray">#dedede</color>
+    <color name="base_white">#ffffff</color>
+    <color name="base_black">#000000</color>
+    <color name="base_red">#DC143C</color>
+    <color name="base_transparent">#00000000</color>
+    <color name="base_load_view_gray">#c5c5c5</color>
+    <color name="base_load_view_black">#919191</color>
+    <color name="base_refreshlayout_headview_gray">#f6f6f6</color>
+    <color name="base_refreshlayout_toast_gray">#dbdbdb</color>
+
+</resources>

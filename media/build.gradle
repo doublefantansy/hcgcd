@@ -1,0 +1,77 @@
+if (rootProject.ext.isModule) {
+    apply plugin: 'com.android.library'
+} else {
+    apply plugin: 'com.android.application'
+}
+apply plugin: 'kotlin-android'
+//在Kotlin可以使用kapt插件来支持Android的注解处理。
+apply plugin: 'kotlin-kapt'
+//findViewById插件
+apply plugin: 'kotlin-android-extensions'
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner rootProject.ext.android.testInstrumentationRunner
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+//    resourcePrefix "media_"
+    useLibrary 'org.apache.http.legacy'
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ["libs"]
+
+            if (rootProject.ext.isModule) {
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/application/AndroidManifest.xml'
+                java {
+                    exclude '*module'
+                }
+            }
+        }
+    }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
+    }
+}
+
+dependencies {
+    kapt rootProject.ext.dependencies.arouterCompiler
+    implementation project(":base")
+    api(name: 'BaseLib-release', ext: 'aar')
+    api(name: 'DataAdapterModule-release', ext: 'aar')
+    api(name: 'DHCommon2.0-release', ext: 'aar')
+    api(name: 'EntityDefine-release', ext: 'aar')
+    api(name: 'DHPlayerComponent-release', ext: 'aar')
+    api(name: 'DHPlaySDKModule-release', ext: 'aar')
+    api(name: 'LogModule-release', ext: 'aar')
+    api(name: 'PullToRefresh_library-release', ext: 'aar')
+    api(name: 'OrmliteSqlcipherModlule-release', ext: 'aar')
+    api(name: 'PermissionChecker-release', ext: 'aar')
+    api(name: 'DataAdapteeModule-release', ext: 'aar')
+
+
+
+}

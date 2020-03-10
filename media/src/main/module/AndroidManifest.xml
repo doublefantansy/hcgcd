@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cc.hc.media">
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <application>
+        <activity
+            android:name=".MediaBackActivity"
+            android:screenOrientation="portrait"></activity>
+    </application>
+</manifest>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edittext_phone"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/login_edittext_style"
+            android:hint="请输入手机号"
+            android:inputType="number"
+            android:padding="10dp"
+            android:textCursorDrawable="@drawable/shape_cursor_color"></EditText>
+
+        <EditText
+            android:id="@+id/edittext_password"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/login_edittext_style"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textCursorDrawable="@drawable/shape_cursor_color" />
+
+        <hzkj.cc.base.weight.CcTextView
+            android:id="@+id/textview_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/login_button_style"
+            android:paddingLeft="25dp"
+            android:paddingTop="10dp"
+            android:paddingRight="25dp"
+            android:paddingBottom="10dp"
+            android:text="登陆"
+            android:textColor="@color/base_white"
+            android:textSize="17sp"></hzkj.cc.base.weight.CcTextView>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="myDialogStyle" parent="Theme.AppCompat.DialogWhenLarge">
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:background">@color/base_transparent</item>
+        <item name="android:windowBackground">@color/base_white</item>
+
+    </style>
+    <style name="myStyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_out</item>
+    </style>
+</resources>

@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="window" >
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/base_blue</item>
+        <item name="colorPrimaryDark">@color/base_red</item>
+        <item name="colorAccent">@color/base_blue</item>
+    </style>
+
+</resources>

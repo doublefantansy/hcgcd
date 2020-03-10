@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <hzkj.cc.base.weight.CcTextView
+        android:id="@+id/textview_areaName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/base_red"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/base_white"
+        android:textSize="22sp"></hzkj.cc.base.weight.CcTextView>
+
+    <com.android.dahua.dhplaycomponent.windowcomponent.window.PlayWindow
+        android:id="@+id/play_window"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        PlayWinBG="#000000"
+        Focus_SurfaceBG="#000000"
+        Normal_SurfaceBG="#000000"
+        android:theme="@style/window" />
+</LinearLayout>

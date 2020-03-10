@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <hzkj.cc.base.weight.CcTextView
+                    android:id="@+id/startTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:textSize="25sp"></hzkj.cc.base.weight.CcTextView>
+
+                <hzkj.cc.base.weight.CcTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="至"
+                    android:textSize="25sp"></hzkj.cc.base.weight.CcTextView>
+
+                <hzkj.cc.base.weight.CcTextView
+                    android:id="@+id/endTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:textSize="25sp"></hzkj.cc.base.weight.CcTextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <hzkj.cc.base.weight.CcTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="采区名称："
+                    android:textSize="22sp"></hzkj.cc.base.weight.CcTextView>
+
+                <hzkj.cc.base.weight.CcTextView
+                    android:id="@+id/textview_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"></hzkj.cc.base.weight.CcTextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <hzkj.cc.base.weight.CcTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="船只总数："
+                    android:textSize="22sp"></hzkj.cc.base.weight.CcTextView>
+
+                <hzkj.cc.base.weight.CcTextView
+                    android:id="@+id/textview_total_ship"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"></hzkj.cc.base.weight.CcTextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <hzkj.cc.base.weight.CcTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="进港船只："
+                    android:textSize="22sp"></hzkj.cc.base.weight.CcTextView>
+
+                <hzkj.cc.base.weight.CcTextView
+                    android:id="@+id/textview_in_ship"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"></hzkj.cc.base.weight.CcTextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <hzkj.cc.base.weight.CcTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="出港船只："
+                    android:textSize="22sp"></hzkj.cc.base.weight.CcTextView>
+
+                <hzkj.cc.base.weight.CcTextView
+                    android:id="@+id/textview_out_ship"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"></hzkj.cc.base.weight.CcTextView>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

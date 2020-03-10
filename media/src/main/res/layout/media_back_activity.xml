@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <hzkj.cc.base.weight.indulgeTitle.IndulgeTitle
+        android:id="@+id/indulgeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/base_blue"
+        app:centerText="视频回放"
+        app:showLeftBack="true"></hzkj.cc.base.weight.indulgeTitle.IndulgeTitle>
+
+    <com.android.dahua.dhplaycomponent.windowcomponent.window.PlayWindow
+        android:id="@+id/play_window"
+        Focus_SurfaceBG="#000000"
+        Normal_SurfaceBG="#000000"
+        PlayWinBG="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="270dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/speed_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/media_speed_down"></ImageView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <hzkj.cc.base.weight.CcTextView
+                android:id="@+id/display_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/base_blue"
+                android:textSize="20sp"></hzkj.cc.base.weight.CcTextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/speed_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/media_speed_up"></ImageView>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
