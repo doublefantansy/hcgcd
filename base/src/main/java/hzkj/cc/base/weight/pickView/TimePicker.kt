@@ -3,14 +3,12 @@ package hzkj.cc.base.weight.pickView
 import android.app.Dialog
 import android.content.Context
 import android.view.Gravity
-import android.view.WindowManager
 import android.view.WindowManager.LayoutParams
 import androidx.recyclerview.widget.LinearLayoutManager
 import hzkj.cc.base.R
 import hzkj.cc.base.ViewUtil
 import hzkj.cc.base.weight.CcTextView
-import java.util.Calendar
-import java.util.Date
+import java.util.*
 
 /**
 
@@ -55,7 +53,6 @@ class TimePicker(context: Context, theme: Int = R.style.myDialogStyle) : Dialog(
     }
 
     fun setDate(date: Date): TimePicker {
-
         var calendar = Calendar.getInstance().apply {
             time = date
         }
@@ -82,12 +79,12 @@ class TimePicker(context: Context, theme: Int = R.style.myDialogStyle) : Dialog(
 
     override fun show() {
         super.show()
-        val windowManager: WindowManager = getWindow().getWindowManager()
-        val lp: LayoutParams = getWindow().getAttributes()
+//        getWindow().windowManager
+        val lp: LayoutParams = window.attributes
         window.setGravity(Gravity.BOTTOM)
         lp.width = ViewUtil.dipToPx(context, 360).toInt() //设置宽度
         lp.height = ViewUtil.dipToPx(context, 250).toInt() //设置宽度
         window.setWindowAnimations(R.style.myStyle)
-        getWindow().setAttributes(lp)
+        window.attributes = lp
     }
 }

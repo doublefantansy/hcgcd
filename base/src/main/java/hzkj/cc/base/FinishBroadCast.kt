@@ -6,10 +6,10 @@ import android.content.Context
 import android.content.Intent
 
 class FinishBroadCast : BroadcastReceiver() {
-  override fun onReceive(
-    context: Context?,
-    intent: Intent?
-  ) {
-    (context as Activity).finish()
-  }
+    override fun onReceive(
+            context: Context?,
+            intent: Intent?
+    ) {
+        (context as Activity).finish()
+    }
 }

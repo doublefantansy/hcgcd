@@ -13,6 +13,6 @@ interface CountService {
         endTime: String,
         @Query("areaCode")
         areaCode: String
-    ): MyResponseData<MutableList<StatInfo>>
+    ): MyResponseData<StatInfo>
 
 }

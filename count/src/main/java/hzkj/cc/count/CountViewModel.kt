@@ -14,7 +14,7 @@ class CountViewModel : BaseViewModel() {
 //    var AREA = 10
     }
 
-    var countDatas = MutableLiveData<MutableList<StatInfo>>()
+    var countDatas = MutableLiveData<StatInfo>()
     var countResposity = CountResposity()
     fun getCountDatas(
         startTime: String,

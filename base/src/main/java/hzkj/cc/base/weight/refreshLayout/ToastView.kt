@@ -21,7 +21,6 @@ class ToastView(context: Context) : LinearLayout(context) {
         var HASLOAD = "数据已加载"
         var LOADEMPTY = "没有数据了"
         var REFRESHEMPTY = "暂无数据"
-
         var NETERROR = "网络走神了"
     }
 

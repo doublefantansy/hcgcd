@@ -16,8 +16,8 @@ class AlarmViewModel : BaseViewModel() {
     }
 
     var alarmDatas = MutableLiveData<MutableList<SensorAlarmInfo>>()
-    var alarmImg = MutableLiveData<String>()
-    var imageView = MutableLiveData<ImageView>()
+    //    var alarmImg = MutableLiveData<String>()
+    var imageView = MutableLiveData<Triple<ImageView, String, String>>()
     private var resposity = AlarmResposity()
     fun getAlarmDatas(
         areaCode: String,
@@ -32,13 +32,18 @@ class AlarmViewModel : BaseViewModel() {
     }
 
     fun searchAlarmImgById(
+        p: Int,
         id: Int,
         imageView: ImageView
     ) {
         launchUI({
-            alarmImg.value = resposity.searchAlarmImgById(id)
-                .data
-            this@AlarmViewModel.imageView.value = imageView
-        }, ALARMIMG)
+
+            //            alarmImg.value =
+            this@AlarmViewModel.imageView.value = Triple(
+                imageView, p.toString(), resposity.searchAlarmImgById(id)
+                    .data
+            )
+
+        }, imageView)
     }
 }

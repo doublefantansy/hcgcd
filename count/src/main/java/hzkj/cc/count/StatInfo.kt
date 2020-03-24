@@ -6,8 +6,7 @@ package hzkj.cc.count
  * @Date 2020-02-28-11:27
  */
 class StatInfo {
-    var state = 0
-    var percentAge = 0
-    var desciption: String? = null
-    var direction = 0
+    var inShip = 0
+    var outShip = 0
+    var total = 0
 }

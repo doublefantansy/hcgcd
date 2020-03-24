@@ -15,7 +15,7 @@ class CountResposity : BaseRepository() {
         startTime: String,
         endTime: String,
         areaCode: String
-    ): MyResponseData<MutableList<StatInfo>> = request {
+    ): MyResponseData<StatInfo> = request {
         RetrofitClient.getRetrofit(CountService::class.java)
             .getCountDatas(startTime, endTime, areaCode)
     }

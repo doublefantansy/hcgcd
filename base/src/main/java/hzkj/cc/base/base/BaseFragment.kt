@@ -23,8 +23,9 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     abstract fun initData()
     abstract fun onShow()
     abstract fun onHide()
-//    var hasAdd: Boolean = false
+    //    var hasAdd: Boolean = false
     lateinit var viewModel: VM
+    var isShow = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +37,9 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
+        isShow = !hidden
         if (!hidden) {
+
             onShow()
 //            hasAdd = true
         } else {
@@ -78,7 +81,7 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this)
             .get(((this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<VM>))
-        lifecycle.addObserver(viewModel)
+//        lifecycle.addObserver(viewModel)
 
         initData()
         initView()
@@ -105,12 +108,12 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
         Log.d("cc_lsy", "complete+${it.toString()}")
     }
 
-    open fun updateError(it: Int?) {
+    open fun updateError(it: Any) {
         Log.d("cc_lsy", it.toString())
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        lifecycle.removeObserver(viewModel)
+//        lifecycle.removeObserver(viewModel)
     }
 }

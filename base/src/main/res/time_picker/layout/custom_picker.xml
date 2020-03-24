@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:pv_number="5"
-            app:pv_text_color="#666"
+            app:pv_text_color="@color/base_black"
             app:pv_text_size="20sp"></hzkj.cc.base.weight.pickView.PickerView>
 
     </LinearLayout>

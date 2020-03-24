@@ -15,19 +15,39 @@
             android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/in"
             android:gravity="center"
             android:textColor="@color/base_white"
             android:textSize="17sp"></hzkj.cc.base.weight.CcTextView>
 
         <ImageView
-            android:id="@+id/direction"
+            android:id="@+id/in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="2dp"
-            android:layout_toLeftOf="@id/shipNumber"></ImageView>
+            android:layout_toLeftOf="@id/outShipNumber"
+            android:src="@drawable/recyclerview_item_in"></ImageView>
 
         <hzkj.cc.base.weight.CcTextView
-            android:id="@+id/shipNumber"
+            android:id="@+id/outShipNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:layout_toLeftOf="@id/out"
+            android:gravity="center"
+            android:textColor="@color/base_white"
+            android:textSize="17sp"></hzkj.cc.base.weight.CcTextView>
+
+        <ImageView
+            android:id="@+id/out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:layout_toLeftOf="@id/inShipNumber"
+            android:src="@drawable/recyclerview_item_out"></ImageView>
+
+        <hzkj.cc.base.weight.CcTextView
+            android:id="@+id/inShipNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

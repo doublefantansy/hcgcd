@@ -3,7 +3,6 @@ package hzkj.cc.main
 import hzkj.cc.base.MyResponseData
 import hzkj.cc.base.RetrofitClient
 import hzkj.cc.base.base.BaseRepository
-import hzkj.cc.count.AreaService
 
 /**
 

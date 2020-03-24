@@ -13,6 +13,7 @@ class SensorAlarmInfo {
     var handleDate: Date? = null
     var alarmDateSlot: String? = null
     var direction: String? = null
-    var shipNumber = 0
+    var getInfo = 0
+    var out = 0
     var alarmImg: String? = null
 }

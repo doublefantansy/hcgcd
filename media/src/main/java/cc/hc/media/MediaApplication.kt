@@ -13,6 +13,7 @@ class MediaApplication : IComponentApplication {
 
     override fun init(application: Application?) {
         println("media_app")
+        loadLibrary()
 
 //
 //        DataAdapterImpl.getInstance()
@@ -23,14 +24,14 @@ class MediaApplication : IComponentApplication {
 //        var s = 1
     }
 
-//    private fun loadLibrary() {
-//        System.loadLibrary("gnustl_shared")
-//        System.loadLibrary("CommonSDK")
-//        System.loadLibrary("Encrypt")
-//        System.loadLibrary("DPSStream")
-//        System.loadLibrary("dsl")
-//        System.loadLibrary("dslalien")
-//        System.loadLibrary("PlatformSDK")
-//        System.loadLibrary("DPRTSPSDK")
-//    }
+    private fun loadLibrary() {
+        System.loadLibrary("gnustl_shared")
+        System.loadLibrary("CommonSDK")
+        System.loadLibrary("Encrypt")
+        System.loadLibrary("DPSStream")
+        System.loadLibrary("dsl")
+        System.loadLibrary("dslalien")
+        System.loadLibrary("PlatformSDK")
+        System.loadLibrary("DPRTSPSDK")
+    }
 }

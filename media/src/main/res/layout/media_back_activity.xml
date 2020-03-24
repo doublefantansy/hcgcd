@@ -18,6 +18,7 @@
         Focus_SurfaceBG="#000000"
         Normal_SurfaceBG="#000000"
         PlayWinBG="#000000"
+        android:theme="@style/window"
         android:layout_width="match_parent"
         android:layout_height="270dp" />
 

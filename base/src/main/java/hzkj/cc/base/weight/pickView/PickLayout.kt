@@ -25,7 +25,7 @@ class PickLayout(context: Context, attributeSet: AttributeSet?) :
     init {
         var view = LayoutInflater.from(context)
             .inflate(R.layout.base_pick_layout, null)
-        pickerView = view.findViewById<PickerView>(R.id.pickview)
+        pickerView = view.findViewById(R.id.pickview)
         cancelButton = view.findViewById(R.id.cancel)
         chooseButton = view.findViewById(R.id.choose)
         cancelButton.setOnClickListener { cancelListener.invoke() }

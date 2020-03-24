@@ -6,15 +6,15 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import hzkj.cc.base.R
 import hzkj.cc.base.ViewUtil
+import hzkj.cc.base.weight.CcTextView
 
 class IndulgeTitle(context: Context, attributeSet: AttributeSet) :
     FrameLayout(context, attributeSet) {
 
-    var textView: TextView
+    var textView: CcTextView
     var mostLeftImageView: ImageView
     var rightImageView: ImageView
 
@@ -30,7 +30,7 @@ class IndulgeTitle(context: Context, attributeSet: AttributeSet) :
     lateinit var leftImageClickListenner: () -> Unit
 
     init {
-        textView = TextView(context)
+        textView = CcTextView(context)
         textView.textSize = 20f
         textView.layoutParams =
             ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)

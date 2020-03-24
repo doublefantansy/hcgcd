@@ -9,6 +9,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +23,11 @@ import hzkj.cc.base.ViewUtil
  * Copyright github.com/limxing
  *
  */
-class PickerView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+class PickerView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) :
     RecyclerView(context, attrs, defStyleAttr) {
 
     private var numberCell: Int
@@ -38,7 +43,10 @@ class PickerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     init {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.PickerView)
         textSize = typedArray.getDimension(R.styleable.PickerView_pv_text_size, 17f)
-        textColor = typedArray.getColor(R.styleable.PickerView_pv_text_color, Color.parseColor("#333333"))
+        textColor = typedArray.getColor(
+            R.styleable.PickerView_pv_text_color,
+            ContextCompat.getColor(context, R.color.base_blue)
+        )
         lineHeight = typedArray.getDimension(R.styleable.PickerView_pv_line_height, 3f)
         lineColor = typedArray.getColor(R.styleable.PickerView_pv_line_color, Color.GRAY)
         numberCell = typedArray.getInt(R.styleable.PickerView_pv_number, 5)
@@ -70,6 +78,7 @@ class PickerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
             it.scaleX = scale
 //            it.alpha = scale
             it.scaleY = scale
+            println(it.scaleX)
         }
     }
 
@@ -87,7 +96,13 @@ class PickerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         paint.strokeWidth = lineHeight
         paint.color = lineColor
         c?.drawLine(0f, cellHeight * 2f, sizeWidth.toFloat(), cellHeight * 2f, paint)
-        c?.drawLine(0f, sizeHeight - cellHeight * 2f, sizeWidth.toFloat(), sizeHeight - cellHeight * 2f, paint)
+        c?.drawLine(
+            0f,
+            sizeHeight - cellHeight * 2f,
+            sizeWidth.toFloat(),
+            sizeHeight - cellHeight * 2f,
+            paint
+        )
     }
 
     override fun onMeasure(widthSpec: Int, heightSpec: Int) {
@@ -104,7 +119,10 @@ class PickerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val tv = TextView(parent.context)
             tv.layoutParams =
-                RecyclerView.LayoutParams(pickerView.sizeWidth, pickerView.sizeHeight / pickerView.numberCell)
+                RecyclerView.LayoutParams(
+                    pickerView.sizeWidth,
+                    pickerView.sizeHeight / pickerView.numberCell
+                )
             tv.gravity = Gravity.CENTER
             tv.textSize = textSize.toFloat()
             tv.setTextColor(textColor)
@@ -126,7 +144,8 @@ class PickerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            if (getItemViewType(position) == 1) (holder.itemView as TextView).text = array[position - 2]
+            if (getItemViewType(position) == 1) (holder.itemView as TextView).text =
+                array[position - 2]
             else {
             }
         }

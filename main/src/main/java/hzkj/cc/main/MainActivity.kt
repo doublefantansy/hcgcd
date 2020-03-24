@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import hzkj.cc.base.NotifyDialog
 import hzkj.cc.base.TimeUtil
 import hzkj.cc.base.base.BaseActivity
 import hzkj.cc.base.weight.pickView.PickViewDialog
@@ -32,8 +31,8 @@ class MainActivity(
     override var isImmerse: Boolean = false
 ) : BaseActivity<MainViewModel>() {
 
-    lateinit var defalutStartTime: String
-    lateinit var defalutEndTime: String
+    private lateinit var defalutStartTime: String
+    private lateinit var defalutEndTime: String
     var areas = mutableListOf<Area>()
     private lateinit var bottom_navigation_array: MutableList<BottomChild>
 
@@ -71,6 +70,7 @@ class MainActivity(
                 }
         }
     }
+
     private var changePasswordBroadCast = object : BroadcastReceiver() {
         override fun onReceive(
             context: Context?,
@@ -257,21 +257,6 @@ class MainActivity(
         unregisterReceiver(mainBroadCast)
         unregisterReceiver(changePasswordBroadCast)
 
-    }
-
-    override fun updateError(it: Int?) {
-        super.updateError(it)
-//        ViewUtil.toast(this, "获取采区信息失败")
-        NotifyDialog.Builder(this)
-            .canCancel(false)
-            .canOutsideCancel(false)
-            .image(hzkj.cc.base.R.drawable.base_token_timeout_dialog_error_icon)
-            .dismissListenner {
-                viewModel.getAreas()
-            }
-            .text("获取采区信息失败,点击重新获取")
-            .build()
-            .show()
     }
 
     override fun initData() {

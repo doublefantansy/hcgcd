@@ -8,12 +8,13 @@ import hzkj.cc.base.base.BaseViewModel
  * @Author chencheng
  * @Date 2020-02-27-16:22
  */
-class MainViewModel:BaseViewModel() {
+class MainViewModel : BaseViewModel() {
     companion object {
         var AREA = 10
     }
-    var areaResposity = AreaResposity()
-    var areaDatas = MutableLiveData<MutableList<hzkj.cc.main.Area>>()
+
+    private var areaResposity = AreaResposity()
+    var areaDatas = MutableLiveData<MutableList<Area>>()
 
     fun getAreas() {
         launchUI({

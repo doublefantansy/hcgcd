@@ -5,6 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface AlarmService {
+
     @GET("/sensorAlarmInfos/search")
     suspend fun getAlarmDatas(
         @Query("areaCode") areaCode: String, @Query("startTime") startTime: String, @Query(

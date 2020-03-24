@@ -52,7 +52,7 @@ class MediaFragment : BaseFragment<MediaViewModel>() {
     private var mDeviceWithChannelList: DeviceWithChannelList? = null
     private var list: MutableList<GroupInfo>? = null
     private var channelInfos: MutableList<ChannelInfo> = mutableListOf()
-
+    var first = true
     //    private lateinit var mReceiver: DeviceBroadcastReceiver
     private var dataAdapterInterface: DataAdapterInterface? = null
 
@@ -60,7 +60,11 @@ class MediaFragment : BaseFragment<MediaViewModel>() {
         override fun onReceive(context: Context?, intent: Intent?) {
             areaCode = intent!!.getStringExtra("areaCode")
             areaName = intent!!.getStringExtra("areaName")
-            viewModel.getCameras(areaCode!!)
+            if (first) {
+                first = false
+            } else {
+                viewModel.getCameras(areaCode!!)
+            }
         }
     }
 
@@ -70,11 +74,18 @@ class MediaFragment : BaseFragment<MediaViewModel>() {
             when (msg?.what) {
                 0 -> {
                     mPlayManager?.stopAll()
+                    MMKV.defaultMMKV().remove("mediaUserInfo")
                     ViewUtil.toast(activity!!, "网络异常")
                 }
                 1 -> {
                     mPlayManager?.stopAll()
                     ViewUtil.toast(activity!!, "播放失败")
+                }
+                2 -> {
+                    mPlayManager?.stopAll()
+                    MMKV.defaultMMKV().remove("mediaUserInfo")
+                    ViewUtil.toast(activity!!, "播放超时")
+//                    areaCode?.let { viewModel.getCameras(it) }
                 }
             }
 
@@ -104,20 +115,30 @@ class MediaFragment : BaseFragment<MediaViewModel>() {
         MMKV.defaultMMKV().remove("mediaUserInfo")
     }
 
-    override fun updateError(it: Int?) {
+    override fun updateError(it: Any) {
         super.updateError(it)
         ViewUtil.toast(activity as Context, "获取摄像机信息失败")
     }
 
     override fun onShow() {
         println(MMKV.defaultMMKV().containsKey("mediaUserInfo"))
-        if (mPlayManager == null) {
+        if (!MMKV.defaultMMKV().containsKey("mediaUserInfo")) {
             areaCode?.run {
                 viewModel.getCameras(this)
             }
         } else {
-            replay()
+            if (mPlayManager == null) {
+                viewModel.getCameras(areaCode!!)
+            } else {
+                replay()
+            }
         }
+
+//    else {
+//        areaCode?.run {
+//            viewModel.getCameras(this)
+//        }
+//    }
     }
 
     private val iMediaPlayListener: IMediaPlayListener = object : IMediaPlayListener() {
@@ -134,7 +155,8 @@ class MediaFragment : BaseFragment<MediaViewModel>() {
                 handler.sendEmptyMessage(0)
             } else if (type == ePlayFailed) {
                 handler.sendEmptyMessage(1)
-
+            } else if (type == eStatusTimeOut) {
+                handler.sendEmptyMessage(2)
             }
         }
     }
@@ -171,18 +193,24 @@ class MediaFragment : BaseFragment<MediaViewModel>() {
 
     override fun onResume() {
         super.onResume()
-        replay()
+        if (isShow) {
+            replay()
+        }
     }
 
     override fun onPause() {
         super.onPause()
-        stopAll()
+        if (isShow) {
+            stopAll()
+        }
+
     }
 
     override fun startObserve() {
         viewModel.cameraDatas.observe(this, Observer {
 
             if (it.size > 0) {
+
                 textview_areaName.text = areaName
                 camera = it[0]
                 if (MMKV.defaultMMKV().containsKey("mediaUserInfo")) {
@@ -213,11 +241,7 @@ class MediaFragment : BaseFragment<MediaViewModel>() {
         viewModel.isSuccess.observe(this, Observer {
             if (it != null) {
                 MMKV.defaultMMKV().putString("mediaUserInfo", Gson().toJson(it))
-                activity?.sendBroadcast(Intent().apply {
-                    action = "main"
-                    putExtra("areaCode", areaCode)
-                    putExtra("from", "media")
-                })
+
 //                ViewUtil.toast(activity as Context, "登陆成功")
                 init()
             } else {
@@ -227,6 +251,11 @@ class MediaFragment : BaseFragment<MediaViewModel>() {
     }
 
     private fun init() {
+        activity?.sendBroadcast(Intent().apply {
+            action = "main"
+            putExtra("areaCode", areaCode)
+            putExtra("from", "media")
+        })
         channelInfos.clear()
         list = dataAdapterInterface?.queryGroup(null)
         mDeviceWithChannelList =
@@ -253,7 +282,9 @@ class MediaFragment : BaseFragment<MediaViewModel>() {
         play_window.layoutParams = lp
         play_window.forceLayout(mScreenWidth, mScreenHeight)
         mPlayManager?.addCamera(0, getCamera(channelInfos!!.get(0)))
-        mPlayManager?.playCurpage()
+        if (isShow) {
+            mPlayManager?.playCurpage()
+        }
     }
 
     override fun onHide() {

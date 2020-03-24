@@ -74,24 +74,30 @@ class MediaBackActivity(
                 }
                 2 -> {
                     mPlayManager?.stopAll()
+                    MMKV.defaultMMKV().remove("mediaUserInfo")
                     ViewUtil.toast(this@MediaBackActivity, "网络异常")
                 }
                 3 -> {
                     mPlayManager?.stopAll()
                     ViewUtil.toast(this@MediaBackActivity, "播放失败")
                 }
+                4 -> {
+                    mPlayManager?.stopAll()
+                    MMKV.defaultMMKV().remove("mediaUserInfo")
+                    ViewUtil.toast(this@MediaBackActivity, "播放超时")
+                }
             }
         }
     }
 
-    lateinit var camera: cc.hc.media.Camera
+    lateinit var camera: Camera
     private lateinit var channelInfo: ChannelInfo
     private val recordResource = RecordResource.Platform
     override fun getLayoutId(): Int {
         return R.layout.media_back_activity
     }
 
-    override fun updateError(it: Int?) {
+    override fun updateError(it: Any) {
         super.updateError(it)
         ViewUtil.toast(this, "获取摄像机信息失败")
     }
@@ -172,6 +178,10 @@ class MediaBackActivity(
                     println(KEY_Handler_Seek_Cross_Border)
 
                 }
+                PlayStatusType.eStatusTimeOut -> {
+                    handler.sendEmptyMessage(4)
+
+                }
             }
         }
 
@@ -188,11 +198,9 @@ class MediaBackActivity(
     override fun initData() {
         viewModel.getCamarasBySennorCode(intent.getStringExtra("sensorCode"))
         dataAdapterInterface = DataAdapterImpl.getInstance()
-
         mPlayManager = PlayManagerProxy()
         mPlayManager.init(this, 1, 1, play_window)
         mPlayManager.setOnMediaPlayListener(iMediaPlayListener)
-
         startTime =
             TimeUtil.formatStringToDate(
                 intent.getStringExtra("startTime"),

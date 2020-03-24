@@ -12,6 +12,7 @@ import hzkj.cc.base.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_count.*
 import java.util.*
 
+
 /**
 
  * @Author chencheng
@@ -22,6 +23,7 @@ class CountFragment : BaseFragment<CountViewModel>() {
 
     var areaName: String? = null
     var areaCode: String? = null
+
 
     private var areaBroadCast = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -70,9 +72,9 @@ class CountFragment : BaseFragment<CountViewModel>() {
         activity!!.registerReceiver(timeBroadCast, IntentFilter().apply { addAction("countTime") })
     }
 
-    override fun updateError(it: Int?) {
+    override fun updateError(it: Any) {
         ViewUtil.toast(
-            activity as Context, when (it) {
+            activity as Context, when (it as Int) {
                 CountViewModel.COUNT -> "获取统计信息失败"
                 else -> ""
             }
@@ -87,9 +89,11 @@ class CountFragment : BaseFragment<CountViewModel>() {
                 putExtra("areaCode", areaCode)
                 putExtra("from", "count")
             })
-            textview_total_ship.text = it[0].percentAge.toString()
-            textview_in_ship.text = it[1].percentAge.toString()
-            textview_out_ship.text = it[2].percentAge.toString()
+
+            textview_in_ship.text = it?.inShip?.toString() ?: "0"
+            textview_out_ship.text = it?.outShip?.toString() ?: "0"
+            textview_total_ship.text =
+                (textview_in_ship.text.toString().toInt() + textview_out_ship.text.toString().toInt()).toString()
         })
     }
 

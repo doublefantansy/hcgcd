@@ -14,7 +14,8 @@ import hzkj.cc.base.weight.CcTextView
  * @Author chencheng
  * @Date 2020-02-27-09:54
  */
-class PickViewDialog(context: Context, theme: Int = R.style.myDialogStyle) : Dialog(context, theme) {
+class PickViewDialog(context: Context, theme: Int = R.style.myDialogStyle) :
+    Dialog(context, theme) {
 
     private var pickLayout: PickerView
     private var cancel: CcTextView
@@ -43,12 +44,13 @@ class PickViewDialog(context: Context, theme: Int = R.style.myDialogStyle) : Dia
 
     override fun show() {
         super.show()
+
         val lp: WindowManager.LayoutParams = getWindow().getAttributes()
         window.setGravity(Gravity.BOTTOM)
         lp.width = ViewUtil.dipToPx(context, 360).toInt() //设置宽度
         lp.height = ViewUtil.dipToPx(context, 250).toInt() //设置宽度
         window.setWindowAnimations(R.style.myStyle)
-        getWindow().setAttributes(lp)
+        window.attributes = lp
     }
 
     fun setChooseListener(listener: (p: Int, str: String) -> Unit): PickViewDialog {

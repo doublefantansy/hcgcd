@@ -18,6 +18,7 @@ import hzkj.cc.base.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_map.*
 import pub.devrel.easypermissions.EasyPermissions
 
+
 /**
 
  * @Author chencheng
@@ -28,7 +29,8 @@ class MapFragment : BaseFragment<MapViewModel>(), EasyPermissions.PermissionCall
 
     var areaName: String? = null
     var areaCode: String? = null
-
+    var first = true
+    var firstShow = true
     private var sennors = mutableListOf<Sennor>()
     private var cameras = mutableListOf<Camera>()
 
@@ -42,7 +44,12 @@ class MapFragment : BaseFragment<MapViewModel>(), EasyPermissions.PermissionCall
         override fun onReceive(context: Context?, intent: Intent?) {
             areaCode = intent!!.getStringExtra("areaCode")
             areaName = intent!!.getStringExtra("areaName")
-            viewModel.getCameras(areaCode!!)
+//            viewModel.getCameras(areaCode!!)
+            if (first) {
+                first = false
+            } else {
+                viewModel.getCameras(areaCode!!)
+            }
         }
     }
 
@@ -73,15 +80,21 @@ class MapFragment : BaseFragment<MapViewModel>(), EasyPermissions.PermissionCall
     }
 
     override fun onShow() {
-        bmapView?.onResume()
-//        areaCode?.let {
-//            viewModel.getCameras(it)
-//        }
+        if (firstShow) {
+            firstShow = false
+            areaCode?.run {
+                viewModel.getCameras(this)
+            }
+        }
+
+
+//        (bmapView.getChildAt(0) as SurfaceView).visibility = View.VISIBLE
+//        bmapView?.onResume()
     }
 
     override fun onResume() {
         super.onResume()
-        bmapView.onResume()
+        bmapView?.onResume()
     }
 
     private fun moveToCenterOfSennors() {
@@ -174,9 +187,9 @@ class MapFragment : BaseFragment<MapViewModel>(), EasyPermissions.PermissionCall
         })
     }
 
-    override fun updateError(it: Int?) {
+    override fun updateError(it: Any) {
         super.updateError(it)
-        when (it) {
+        when (it as Int) {
             MapViewModel.CAMERAS -> {
                 ViewUtil.toast(activity as Context, "获取设备失败")
             }
@@ -200,7 +213,8 @@ class MapFragment : BaseFragment<MapViewModel>(), EasyPermissions.PermissionCall
     }
 
     override fun onHide() {
-        bmapView?.onPause()
+//        (bmapView.getChildAt(0) as SurfaceView).visibility = View.GONE
+//        bmapView?.onPause()
 
     }
 }

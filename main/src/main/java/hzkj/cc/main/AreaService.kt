@@ -1,7 +1,6 @@
-package hzkj.cc.count
+package hzkj.cc.main
 
 import hzkj.cc.base.MyResponseData
-import hzkj.cc.main.Area
 import retrofit2.http.GET
 
 interface AreaService {

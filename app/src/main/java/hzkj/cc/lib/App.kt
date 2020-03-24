@@ -16,8 +16,8 @@ import hzkj.cc.base.IComponentApplication
  */
 class App : Application() {
     companion object {
-        var MODULESLIST =
-            mutableListOf("cc.hc.media.MediaApplication", "hzkj.cc.map.MapApplication")
+        val MODULESLIST =
+                mutableListOf("cc.hc.media.MediaApplication", "hzkj.cc.map.MapApplication")
     }
 
     override fun onCreate() {
@@ -33,8 +33,8 @@ class App : Application() {
         JPushInterface.init(this)
         try {
             DataAdapterImpl.getInstance()
-                .createDataAdapter("com.android.business.adapter.DataAdapteeImpl")
-            loadLibrary()
+                    .createDataAdapter("com.android.business.adapter.DataAdapteeImpl")
+//            loadLibrary()
         } catch (e: BusinessException) {
             e.printStackTrace()
         }
@@ -58,14 +58,4 @@ class App : Application() {
         }
     }
 
-    private fun loadLibrary() {
-        System.loadLibrary("gnustl_shared")
-        System.loadLibrary("CommonSDK")
-        System.loadLibrary("Encrypt")
-        System.loadLibrary("DPSStream")
-        System.loadLibrary("dsl")
-        System.loadLibrary("dslalien")
-        System.loadLibrary("PlatformSDK")
-        System.loadLibrary("DPRTSPSDK")
-    }
 }

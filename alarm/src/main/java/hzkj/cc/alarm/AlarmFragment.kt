@@ -8,7 +8,6 @@ import android.widget.ImageView
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.tencent.mmkv.MMKV
 import hzkj.cc.base.ImgUtil
 import hzkj.cc.base.TimeUtil
 import hzkj.cc.base.base.BaseFragment
@@ -46,7 +45,9 @@ class AlarmFragment : BaseFragment<AlarmViewModel>() {
     }
     private var imgSrc: String? = null
     var pageNum = 1
+    var id: String? = null
     var startTime: String? = null
+
     var endTime: String? = null
     private var areaName: String? = null
     private var areaCode: String? = null
@@ -89,8 +90,14 @@ class AlarmFragment : BaseFragment<AlarmViewModel>() {
         }
         recyclerview.loadingListenner = object : LoadingListenner {
             override fun loadMore() {
-                viewModel.getAlarmDatas(areaCode!!, startTime!!, endTime!!, ++pageNum)
+                areaCode?.run {
+                    viewModel.getAlarmDatas(this, startTime!!, endTime!!, ++pageNum)
+                }
+
             }
+        }
+        adapter.recyclerListener = {
+            //            it.getView<ImageView>(R.id.pic).setImageResource(R.drawable.load_image_placeholder)
         }
         adapter.listener =
             object : Convert<SensorAlarmInfo> {
@@ -101,9 +108,7 @@ class AlarmFragment : BaseFragment<AlarmViewModel>() {
                 ) {
 
                     with(holder) {
-                        getView<ImageView>(R.id.pic).setImageResource(R.drawable.load_image_placeholder)
                         itemView.setOnClickListener {
-                            System.out.println(MMKV.defaultMMKV().containsKey("mediaUserInfo"))
                             data.alarmDateSlot?.split("_")
                                 .let {
                                     ARouter.getInstance()
@@ -115,21 +120,22 @@ class AlarmFragment : BaseFragment<AlarmViewModel>() {
                                 }
 
                         }
-                        getView<CcTextView>(R.id.shipNumber)
-                            .text = "${data.shipNumber}艘"
+                        getView<CcTextView>(R.id.outShipNumber)
+                            .text = "${data.out}艘"
+                        getView<CcTextView>(R.id.inShipNumber)
+                            .text = "${data.getInfo}艘"
                         getView<CcTextView>(R.id.date)
                             .text = TimeUtil.dateToFormatString(data.alarmDate)
-                        getView<ImageView>(R.id.direction).setImageDrawable(
-                            context?.getDrawable(
-                                if (data.direction?.toInt() == 0) R.drawable.recyclerview_item_in else R.drawable.recyclerview_item_out
-                            )
+//                        getView<ImageView>(R.id.pic).setImageResource(
+//                            R.drawable.load_image_placeholder
+//                        )
+                        ImgUtil.createImgByBase64(
+                            activity as Context, data.alarmImg!!, getView(R.id.pic)
                         )
-                        viewModel.searchAlarmImgById(data.id, getView<ImageView>(R.id.pic))
-
+//                        getView<ImageView>(R.id.pic).setTag(R.id.item_tag, position)
+//                        viewModel.searchAlarmImgById(position, data.id, getView(R.id.pic))
                     }
-
                 }
-
             }
     }
 
@@ -147,24 +153,29 @@ class AlarmFragment : BaseFragment<AlarmViewModel>() {
         super.onDestroy()
         activity?.unregisterReceiver(alarmBroadCastReceiver)
         activity?.unregisterReceiver(alarmTimeBroadReceiver)
-
     }
 
     override fun onShow() {
 
     }
 
-    override fun updateError(it: Int?) {
+    override fun updateError(it: Any) {
         super.updateError(it)
-        if (AlarmViewModel.ALARM == it) {
-            recyclerview.toast(
-                ToastView.NETERROR,
-                resources.getColor(hzkj.cc.base.R.color.base_red)
-            )
-            if (pageNum == 1) {
-                recyclerview.closeRefresh()
-            } else {
-                recyclerview.closeLoad()
+        when (it) {
+            is Int -> {
+                recyclerview.toast(
+                    ToastView.NETERROR,
+                    resources.getColor(hzkj.cc.base.R.color.base_red)
+                )
+                if (pageNum == 1) {
+                    recyclerview.closeRefresh()
+                    recyclerview.showNetErrorState()
+                } else {
+                    recyclerview.closeLoad()
+                }
+            }
+            is ImageView -> {
+                it.setImageResource(R.drawable.load_image_fail)
             }
         }
     }
@@ -190,19 +201,11 @@ class AlarmFragment : BaseFragment<AlarmViewModel>() {
                     if (it.size == 0) ToastView.LOADEMPTY else ToastView.HASLOAD, it.size
                 )
             }
-
-        })
-        viewModel.alarmImg.observe(this, Observer {
-            this.imgSrc = it
-            println(it)
-
         })
         viewModel.imageView.observe(this, Observer {
-            if (imgSrc == null) {
-                it.setImageResource(R.drawable.load_image_fail)
-            } else {
+            if (((it.first.getTag(R.id.item_tag)) as Int).toString() == it.second) {
                 ImgUtil.createImgByBase64(
-                    activity as Context, imgSrc!!, it
+                    activity as Context, it.third!!, it.first
                 )
             }
         })
