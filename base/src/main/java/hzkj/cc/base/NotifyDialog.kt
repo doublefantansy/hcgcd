@@ -23,6 +23,7 @@ object NotifyDialog {
 
     class Builder(context: Context) {
         private var hint = ""
+        var ss = 2
         var type = 0
         var selectImageView: ImageView? = null
         var selectPosition = -1
